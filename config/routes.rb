@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   post "/users", to: 'users#create'
   get "/users",to: "users#index"
   get '/profile', to: 'users#profile'
-  post 'login', to: 'auth#create'
+  post '/login', to: 'auth#create'
+  get  '/tenants', to: 'tenants#index'
+  get '/owners', to: 'owners#index'
   
   
 end
