@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post '/login', to: 'auth#create'
   get  '/tenants', to: 'tenants#index'
   get '/owners', to: 'owners#index'
+
+  post '/properties', to: 'properties#create'
   
   
 end

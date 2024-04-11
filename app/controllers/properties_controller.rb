@@ -5,7 +5,8 @@ class PropertiesController < ApplicationController
     end
 
     def create
-        property = Property.create(property_params)
+        owner = current_user
+        property = owner.properties.create!(property_params)
         if property.save
             render json: {property: PropertySerializer.new(property)}, status: :created
         else
@@ -24,6 +25,6 @@ class PropertiesController < ApplicationController
 
     private
     def property_params
-        params.require(:user).permit(:property_name,:location)
+        params.permit(:property_name,:location,:owner_id)
     end
 end

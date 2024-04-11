@@ -22,8 +22,15 @@ class ApplicationController < ActionController::API
 
     def current_user
         if decoded_token
-            user_id = decoded_token[0]['user_id']
-            @user = User.find_by(id: user_id)
+            owner_id = decoded_token[0]['owner_id']
+            @owner = Owner.find_by(id: owner_id)
+        end
+    end
+
+    def current_tenant
+        if decoded_token
+            tenant_id = decoded_token[0][:tenant_id]
+            @tenant = Tenant.find_by(id: tenant_id)
         end
     end
 
@@ -31,7 +38,15 @@ class ApplicationController < ActionController::API
         !!current_user
     end
 
+    def tenant?
+        !!current_tenant
+    end
+
     def authorized
         render json: {message: 'Please log in'}, status: :unauthorized unless logged_in?
+    end
+
+    def authorized_tenant
+        render json: {error: 'Please log in'}, status: :unauthorized unless tenant?
     end
 end
