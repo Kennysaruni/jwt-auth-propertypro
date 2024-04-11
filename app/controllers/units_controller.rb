@@ -23,6 +23,6 @@ class UnitsController < ApplicationController
 
     private
     def unit_params
-        params.require(:user).permit(:type,:rent_amount,:bedrooms,:bathrooms)
+        params.permit(:unit_type,:rent_amount,:rooms,:bathrooms,:property_id)
     end
 end

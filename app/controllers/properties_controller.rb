@@ -25,6 +25,6 @@ class PropertiesController < ApplicationController
 
     private
     def property_params
-        params.permit(:property_name,:location,:owner_id)
+        params.permit(:property_name,:location)
     end
 end

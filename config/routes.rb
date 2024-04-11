@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get '/owners', to: 'owners#index'
 
   post '/properties', to: 'properties#create'
+  post '/units',to: 'units#create'
+  get '/properties', to:'properties#index'
   
   
 end
