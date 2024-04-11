@@ -13,7 +13,7 @@ class UnitsController < ApplicationController
     end
 
     def show
-        unit = Unit.find_by(id: unit.id)
+        unit = Unit.find_by(id: params[:id])
         if unit
             render json: {unit: UnitSerializer.new(unit)},status: :ok
         else

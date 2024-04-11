@@ -14,7 +14,7 @@ class PropertiesController < ApplicationController
     end
 
     def show
-        property = Property.find_by(id: property.id)
+        property = Property.find_by(id: params[:id])
         if property
             render json: {property: PropertySerializer.new(property)}, status: :ok
         else
