@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_11_121652) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_11_140941) do
   create_table "leases", force: :cascade do |t|
     t.integer "tenant_id", null: false
     t.integer "unit_id", null: false
@@ -45,6 +45,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_11_121652) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_id"
+    t.index ["owner_id"], name: "index_properties_on_owner_id"
   end
 
   create_table "tenants", force: :cascade do |t|
@@ -79,5 +81,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_11_121652) do
   add_foreign_key "leases", "tenants"
   add_foreign_key "leases", "units"
   add_foreign_key "maintenance_requests", "units"
+  add_foreign_key "properties", "owners"
   add_foreign_key "units", "properties"
 end
