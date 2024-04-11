@@ -13,6 +13,15 @@ class PropertiesController < ApplicationController
         end
     end
 
+    def show
+        property = Property.find_by(id: property.id)
+        if property
+            render json: {property: PropertySerializer.new(property)}, status: :ok
+        else
+            render json: {error: 'Property not found'}, status: :not_found
+        end
+    end
+
     private
     def property_params
         params.require(:user).permit(:property_name,:location)
