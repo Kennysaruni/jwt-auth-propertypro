@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_11_113751) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_11_121652) do
+  create_table "leases", force: :cascade do |t|
+    t.integer "tenant_id", null: false
+    t.integer "unit_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tenant_id"], name: "index_leases_on_tenant_id"
+    t.index ["unit_id"], name: "index_leases_on_unit_id"
+  end
+
+  create_table "maintenance_requests", force: :cascade do |t|
+    t.integer "unit_id", null: false
+    t.string "title"
+    t.text "description"
+    t.integer "status"
+    t.integer "priority"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unit_id"], name: "index_maintenance_requests_on_unit_id"
+  end
+
   create_table "owners", force: :cascade do |t|
     t.string "username"
     t.string "email"
@@ -18,6 +38,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_11_113751) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.string "property_name"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tenants", force: :cascade do |t|
@@ -29,6 +56,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_11_113751) do
     t.integer "user_id"
   end
 
+  create_table "units", force: :cascade do |t|
+    t.integer "property_id", null: false
+    t.string "type"
+    t.decimal "rent_amount"
+    t.integer "rooms"
+    t.integer "bathrooms"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id"], name: "index_units_on_property_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -38,4 +76,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_11_113751) do
     t.string "user_type"
   end
 
+  add_foreign_key "leases", "tenants"
+  add_foreign_key "leases", "units"
+  add_foreign_key "maintenance_requests", "units"
+  add_foreign_key "units", "properties"
 end
