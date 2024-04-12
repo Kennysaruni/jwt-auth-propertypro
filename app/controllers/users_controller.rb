@@ -25,7 +25,7 @@ class UsersController < ApplicationController
             elsif(params[:user_type] == 'Tenant')
                 @tenant = Tenant.create(user_id: @user.id, username:@user.username, email: @user.email)
                 @token = encode_token({tenant_id: @tenant.id, user_id: @user.id})
-                render json: {tenant: TenantSerializer.new(tenant),jwt: @token}, status: :created
+                render json: {tenant: TenantSerializer.new(@tenant),jwt: @token}, status: :created
             else
                 render json: {error: user.errors.full_messages}, status: :unprocessable_entity
             end

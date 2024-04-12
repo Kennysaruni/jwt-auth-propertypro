@@ -10,12 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_11_150802) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_12_131609) do
   create_table "leases", force: :cascade do |t|
     t.integer "tenant_id", null: false
     t.integer "unit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "deposit_amount"
+    t.integer "owner_id"
+    t.index ["owner_id"], name: "index_leases_on_owner_id"
     t.index ["tenant_id"], name: "index_leases_on_tenant_id"
     t.index ["unit_id"], name: "index_leases_on_unit_id"
   end
@@ -78,6 +81,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_11_150802) do
     t.string "user_type"
   end
 
+  add_foreign_key "leases", "owners"
   add_foreign_key "leases", "tenants"
   add_foreign_key "leases", "units"
   add_foreign_key "maintenance_requests", "units"

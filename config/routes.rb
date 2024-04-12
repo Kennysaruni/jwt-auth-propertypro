@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   post '/properties', to: 'properties#create'
   post '/units',to: 'units#create'
   get '/properties', to:'properties#index'
+  post '/lease', to: 'leases#create'
+  get '/leases', to: 'leases#index'
+
   
   
 end
