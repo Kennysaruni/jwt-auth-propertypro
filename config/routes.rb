@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get '/properties', to:'properties#index'
   post '/lease', to: 'leases#create'
   get '/leases', to: 'leases#index'
+  post '/requests', to: 'maintenance_requests#create'
 
   
   

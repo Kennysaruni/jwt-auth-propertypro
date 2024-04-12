@@ -4,7 +4,8 @@ class MaintenanceRequestsController < ApplicationController
     end
 
     def create
-        maintenance_request = MaintenanceRequest.create(maintenance_request_params)
+        unit = Unit.find_by(id: params[:id])
+        maintenance_request = unit.maintenance_requests.create!(maintenance_request_params)
         if maintenance_request.save
             render json: {maintenance_request: MaintenanceRequestSerializer.new(maintenance_request)},status: :created
         else
@@ -15,7 +16,7 @@ class MaintenanceRequestsController < ApplicationController
     def show
         maintenance_request = MaintenanceRequest.find_by(id: params[:id])
         if maintenance_request
-            render json : {maintenance_request: MaintenanceRequestSerializer.new(maintenance_request)}, status: :ok
+            render json: {maintenance_request: MaintenanceRequestSerializer.new(maintenance_request)}, status: :ok
         else
             render json: {error: 'Maintainance request not found'},status: :not_found
         end

@@ -12,21 +12,21 @@ class AuthController < ApplicationController
     # end
 
     def create
-        user = User.find_by(username: user_login_params[:username])
-        if user&.authenticate(user_login_params[:password])
-            if (user.user_type =="Owner")
-                owner = Owner.find_by(user_id:user.id)
-                if owner
-                    token = encode_token({ owner_id: owner.id, user_id: user.id })
-                    render json: { buyer: OwnerSerializer.new(owner), jwt: token }, status: :created
+        @user = User.find_by(username: user_login_params[:username])
+        if @user&.authenticate(user_login_params[:password])
+            if (@user.user_type =="Owner")
+                @owner = Owner.find_by(user_id:@user.id)
+                if @owner
+                    @token = encode_token({ owner_id: @owner.id, user_id: @user.id })
+                    render json: { owner: OwnerSerializer.new(@owner), jwt: @token }, status: :created
                 else
                     render json: {errors:["Invalid Owner username or password"]}, status: :unauthorized
                 end
-            elsif((user.user_type =="Seller"))
-                tenant = Tenant.find_by(user_id:user.id)
-                if tenant
-                    token = encode_token({ tenant_id: tenant.id, user_id: user.id })
-                    render json: { seller: TenantSerializer.new(tenant), jwt: token }, status: :created
+            elsif((@user.user_type =="Tenant"))
+                @tenant = Tenant.find_by(user_id:@user.id)
+                if @tenant
+                    @token = encode_token({ tenant_id: @tenant.id, user_id: @user.id })
+                    render json: { tenant: TenantSerializer.new(@tenant), jwt: @token }, status: :created
                 else
                     render json: {errors:["Invalid Tenant username or password"]}, status: :unauthorized
                 end
