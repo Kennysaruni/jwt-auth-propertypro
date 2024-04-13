@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
     before_action :authorized
+    before_action :authorized_tenant
 
     def encode_token(payload)
         JWT.encode(payload, 'my_s3cr3t')
@@ -47,6 +48,6 @@ class ApplicationController < ActionController::API
     end
 
     def authorized_tenant
-        render json: {error: 'Please log in'}, status: :unauthorized unless tenant?
+        render json: {error: 'Tenant Please log in'}, status: :unauthorized unless tenant?
     end
 end

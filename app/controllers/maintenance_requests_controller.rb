@@ -5,7 +5,8 @@ class MaintenanceRequestsController < ApplicationController
 
     def create
         unit = Unit.find_by(id: params[:id])
-        maintenance_request = unit.maintenance_requests.create!(maintenance_request_params)
+        # tenant = current_tenant
+        # maintenance_request = tenant.maintenance_requests.create!(maintenance_request_params)
         if maintenance_request.save
             render json: {maintenance_request: MaintenanceRequestSerializer.new(maintenance_request)},status: :created
         else

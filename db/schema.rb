@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_12_131609) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_13_044410) do
   create_table "leases", force: :cascade do |t|
     t.integer "tenant_id", null: false
     t.integer "unit_id", null: false
@@ -31,6 +31,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_12_131609) do
     t.integer "priority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "tenant_id"
+    t.index ["tenant_id"], name: "index_maintenance_requests_on_tenant_id"
     t.index ["unit_id"], name: "index_maintenance_requests_on_unit_id"
   end
 
@@ -84,6 +86,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_12_131609) do
   add_foreign_key "leases", "owners"
   add_foreign_key "leases", "tenants"
   add_foreign_key "leases", "units"
+  add_foreign_key "maintenance_requests", "tenants"
   add_foreign_key "maintenance_requests", "units"
   add_foreign_key "properties", "owners"
   add_foreign_key "units", "properties"
