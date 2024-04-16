@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_13_044410) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_16_074611) do
   create_table "leases", force: :cascade do |t|
     t.integer "tenant_id", null: false
     t.integer "unit_id", null: false
@@ -27,8 +27,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_044410) do
     t.integer "unit_id", null: false
     t.string "title"
     t.text "description"
-    t.integer "status"
-    t.integer "priority"
+    t.string "status"
+    t.string "priority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "tenant_id"
