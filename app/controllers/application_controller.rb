@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
     before_action :authorized
-    before_action :authorized_tenant
+    wrap_parameters format:[]
+    # before_action :authorized_tenant
 
     def encode_token(payload)
         JWT.encode(payload, 'my_s3cr3t')
@@ -30,7 +31,7 @@ class ApplicationController < ActionController::API
 
     def current_tenant
         if decoded_token
-            tenant_id = decoded_token[0][:tenant_id]
+            tenant_id = decoded_token[0]['tenant_id']
             @tenant = Tenant.find_by(id: tenant_id)
         end
     end
@@ -44,7 +45,7 @@ class ApplicationController < ActionController::API
     end
 
     def authorized
-        render json: {message: 'Please log in'}, status: :unauthorized unless logged_in?
+        render json: {message: 'Please log in'}, status: :unauthorized unless logged_in? || tenant?
     end
 
     def authorized_tenant

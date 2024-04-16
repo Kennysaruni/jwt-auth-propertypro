@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     skip_before_action :authorized, only:[:create]
-    skip_before_action :authorized_tenant, only:[:create]
+    # skip_before_action :authorized_tenant, only:[:create]
 
     def index
         render json: {users: User.all}, status: :ok
@@ -28,10 +28,10 @@ class UsersController < ApplicationController
     # end
 
     def profile
-        if current_user
-            render json: {owner: OwnerSerializer.new(current_user)}, status: :accepted
-        elsif current_tenant
+        if current_tenant
             render json: {tenant: TenantSerializer.new(current_tenant)}, status: :accepted
+        elsif current_user
+            render json: {owner: OwnerSerializer.new(current_user)}, status: :accepted
         end
     end
     
