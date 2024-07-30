@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get '/properties', to:'properties#index'
 
   post '/units',to: 'units#create'
-  get '/units/:id': to: 'units#show'
+  get '/units/:id', to: 'units#show'
   get '/units', to: 'units#index'
 
   post '/lease', to: 'leases#create'

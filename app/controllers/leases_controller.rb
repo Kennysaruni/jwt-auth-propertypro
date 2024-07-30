@@ -5,7 +5,7 @@ class LeasesController < ApplicationController
 
     def create
         owner = current_user
-        lease = owner.leases.create!(params.permit(:tenant_id, :unit_id))
+        lease = owner.leases.create!(params.permit(:tenant_id, :unit_id, :property_id))
         # lease = Lease.create(lease_params)
         if lease.save
           render json: { lease: LeaseSerializer.new(lease) }, status: :created
@@ -26,6 +26,6 @@ class LeasesController < ApplicationController
 
     private
     def lease_params
-        params.permit(:tenant_id, :unit_id)
+        params.permit(:tenant_id, :unit_id, :property_id)
     end
 end
