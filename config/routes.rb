@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   post '/requests', to: 'maintenance_requests#create'
   get '/requests/:id', to: 'maintenance_requests#show'
   get '/requests', to: 'maintenance_requests#index'
+  patch'/requests/:id', to: 'maintenance_requests#update'
 
   
   
