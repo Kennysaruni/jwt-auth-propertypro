@@ -99,10 +99,19 @@ GEM
     erubi (1.12.0)
     faker (3.3.1)
       i18n (>= 1.8.11, < 2)
+    ffi (1.17.0-aarch64-linux-gnu)
+    ffi (1.17.0-arm-linux-gnu)
+    ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86-linux-gnu)
+    ffi (1.17.0-x86_64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
+    image_processing (1.13.0)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     io-console (0.7.2)
     irb (1.12.0)
       rdoc
@@ -120,6 +129,7 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.4)
+    mini_magick (4.13.2)
     mini_mime (1.1.5)
     minitest (5.22.3)
     msgpack (1.7.2)
@@ -195,6 +205,9 @@ GEM
       psych (>= 4.0.0)
     reline (0.5.1)
       io-console (~> 0.5)
+    ruby-vips (2.2.2)
+      ffi (~> 1.12)
+      logger
     sqlite3 (1.7.3-aarch64-linux)
     sqlite3 (1.7.3-arm-linux)
     sqlite3 (1.7.3-arm64-darwin)
@@ -226,6 +239,7 @@ DEPENDENCIES
   bootsnap
   debug
   faker (~> 3.3)
+  image_processing (~> 1.2)
   jwt (~> 2.8)
   logger
   puma (>= 5.0)
