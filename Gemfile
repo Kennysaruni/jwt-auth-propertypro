@@ -51,3 +51,5 @@ gem "jwt", "~> 2.8"
 gem "active_model_serializers", "~> 0.10.14"
 
 gem "faker", "~> 3.3"
+
+gem "logger"
